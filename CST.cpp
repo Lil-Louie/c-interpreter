@@ -99,8 +99,51 @@ void CST::printTree(){
 }
 
 /** **************************************************************************************
-creates a abstract syntax tree out of our concrete syntax tree. 
-@pre:takes our CST 
+Prints the TREE using BFS
+@pre:breadth first traversal of our ast
+@post: returns a node that has the same address
+ *****************************************************************************************/
+CSTNode* CST::getNodeAtAddress(int searchAddress){
+    if ( root == nullptr ) {
+        std::cout<<"searched for Address: "<<searchAddress<<" but could AST Empty?"<<std::endl;
+        throw;
+        return root;
+    }
+    std::queue<CSTNode*> q;
+    q.push( root );
+
+    while ( !q.empty() ) {
+
+        CSTNode* current = q.front();
+
+        //if the address matches our search address
+        //std::cout<<current->getToken().getAddress()<<std::endl;
+        if(current->getLocation() == searchAddress){
+            //std::cout<<"found Address: "<<searchAddress<<std::endl;
+
+            //return the node we are at
+            return current;
+        }
+
+        q.pop();
+
+        if ( current->getLeft()!= nullptr ){
+            q.push( current->getLeft() );
+        }
+        if ( current->getRight() != nullptr ){
+            q.push( current->getRight() );
+        }
+    }
+
+    //fail case
+    std::cout<<"searched for Address: "<<searchAddress<<" but could not find it in AST"<<std::endl;
+    throw;
+    return root;
+}
+
+/** **************************************************************************************
+creates a abstract syntax tree out of our concrete syntax tree.
+@pre:takes our CST
 @post:converst CST to a AST
 notes:
 use yard's algorithm to convert numerical expressions and boolean expressions to postfix
@@ -113,7 +156,7 @@ return a; return ->value.
  *****************************************************************************************/
 void CST::cstToAst(){
 
-    
+
     //if we find nullptr stop
     if ( root == nullptr ) {
         return;
@@ -122,7 +165,8 @@ void CST::cstToAst(){
     //our new root
     Token token(0,0);
     token.setIdentifier("BEGIN PROGRAM");
-    CSTNode* astRoot = new CSTNode(token);    
+
+    CSTNode* astRoot = new CSTNode(token);
 
     //set up a queue
     std::queue<CSTNode*> q;
@@ -144,23 +188,48 @@ void CST::cstToAst(){
             //print out our line to see what it is.
             std::cout<<"line: "<<std::endl;
             for(int i = 0;i < lineByLine.size();i++){
-                    std::cout<<lineByLine[i].getTokenString()<<"->";
+                std::cout<<lineByLine[i].getTokenString()<<"->";
             }
             std::cout<<std::endl;
 
-            //if the front of our vector is a identifier with the 
+            //if the front of our vector is a identifier with the
             if(lineByLine.front().isIdentifier() && (lineByLine.front().getTokenString() == "function" || lineByLine.front().getTokenString() == "procedure")){
 
                 //insert "DECLARATION" token, and progress to next line.
                 std::cout<<"found DECLARATION with string: "<<lineByLine.front().getTokenString() <<std::endl;
                 Token token(lineByLine.front().getLineNum(), lineByLine.front().getCharPos());
                 token.setIdentifier("DECLARATION");
+
+                std::cout<<"lineByLine.front().getTokenString(): "<<lineByLine.front().getTokenString()<<std::endl;
+
+                //if the token is procedure, then set the token to be the main
+                if(lineByLine.front().getTokenString() == "procedure" ){
+                    //std::cout<<"found main for interpretor -------------------------------------------------------------------------- "<<std::endl;
+                    token.setisFunction();
+
+                    if(lineByLine[1].getTokenString() == "main"){
+                        token.setIsMain();
+                        token.setFunctionName("main");
+                        token.print();
+                    }else{
+                        token.setFunctionName(lineByLine[1].getTokenString());
+                        token.print();
+                    }
+
+                    //otherwise we have a function so set it as such.
+                }else{
+                    token.setisFunction();
+                    std::cout<<"found function lineByLine[1].getTokenString(): "<<lineByLine[1].getTokenString()<<std::endl;
+                    token.setFunctionName(lineByLine[2].getTokenString());
+                }
+
                 addChild(astRoot,token);
 
+
                 lineByLine.clear();
-            //if we find a datatype as a identifier
+                //if we find a datatype as a identifier
             }else if(lineByLine.front().isIdentifier() && (lineByLine.front().getTokenString() == "int" || lineByLine.front().getTokenString() == "string"|| lineByLine.front().getTokenString() == "char"
-                        || lineByLine.front().getTokenString() == "bool")){
+                                                           || lineByLine.front().getTokenString() == "bool")){
 
                 //insert "DECLARATION" token, and progress to next line.
                 for(int i = 0;i < lineByLine.size();i++){
@@ -168,11 +237,16 @@ void CST::cstToAst(){
                         std::cout<<"found DECLARATION with string: "<<lineByLine[i].getTokenString() <<std::endl;
                         Token token(lineByLine[i].getLineNum(), lineByLine[i].getCharPos());
                         token.setIdentifier("DECLARATION");
+
+                        if(lineByLine[i + 1].isArray()){
+                            token.setVarName(lineByLine[i + 1].getTokenString());
+                            token.setArray();
+                        }
                         addChild(astRoot,token);
                     }
                 }
                 //note if multiuple variable are declared, add a declarations token for each of them before moving to the next line.
-                
+
                 lineByLine.clear();
             }else if(lineByLine.front().isIdentifier() && lineByLine.front().getTokenString() == "if" ){
 
@@ -481,7 +555,7 @@ void CST::cstToAst(){
                 addChild(astRoot,token);
             }else if(lineByLine.front().isIdentifier()){
 
-                //check next element in the vector to see if its a equals 
+                //check next element in the vector to see if its a equals
                 //check next element in the vector to see if its a equals for an array as well
                 if(lineByLine[1].isAssignmentOperator() || lineByLine[4].isAssignmentOperator()){
 
@@ -502,9 +576,9 @@ void CST::cstToAst(){
                         }
                     }
 
-                    //test print out 
+                    //test print out
                     for(int i = 0;i < importantTokens.size();i++){
-                    std::cout<<importantTokens[i].getTokenString()<<"->";
+                        std::cout<<importantTokens[i].getTokenString()<<"->";
                     }
 
                     //call yard algorithm
@@ -512,8 +586,8 @@ void CST::cstToAst(){
 
                     //test print out and push onto the ast
                     for(int i = 0;i < postfix.size();i++){
-                    std::cout<<postfix[i].getTokenString()<<"->";
-                    addSibling(astRoot,postfix[i]);
+                        std::cout<<postfix[i].getTokenString()<<"->";
+                        addSibling(astRoot,postfix[i]);
                     }
                 }
                 lineByLine.clear();
@@ -540,12 +614,12 @@ void CST::cstToAst(){
         }
         else if ( current->getRight() != nullptr ){
 
-            // add our elements to our vector 
+            // add our elements to our vector
             lineByLine.push_back(current->getToken());
 
             q.push( current->getRight() );
         } //run the end block code here again if we are at the end of the program we are reading because
-          //queue will become empty and won't be able to go through the while loop again
+            //queue will become empty and won't be able to go through the while loop again
         else if ( current->getToken().isRBrace()){
             //insert "END BLOCK" token, and progress to next line.
             std::cout<<"found END BLOCK with string: "<<lineByLine.front().getTokenString() <<std::endl;
@@ -583,14 +657,14 @@ std::vector<Token> CST::yardAlgorithm (std::vector<Token>& infix){
     //foreach token in token list
     for(int i = 0; i < infix.size(); i++){
         if ((infix[i].isDoubleQuote() || infix[i].isSingleQuote() || infix[i].isLParen()
-            || infix[i].isRParen() || infix[i].isLBracket() || infix[i].isRBracket()) && infix[i].isImportant()){
+             || infix[i].isRParen() || infix[i].isLBracket() || infix[i].isRBracket()) && infix[i].isImportant()){
             postfix.push_back(infix[i]);
         }
         if (infix[i].isAssignmentOperator()){
             isAssignment = true;
             assignmentOp = infix[i];
         }else if ((infix[i].isInt())    || (infix[i].isIdentifier()) || /*(infix[i].isSingleQuote()) || (infix[i].isDoubleQuote()) ||*/
-            (infix[i].isString())/* || (infix[i].isLBracket())   || (infix[i].isRBracket())*/){
+                  (infix[i].isString())/* || (infix[i].isLBracket())   || (infix[i].isRBracket())*/){
             //display token
             std::cout<<"here!"<<std::endl;
             infix[i].print();
@@ -842,8 +916,11 @@ bool CST::tokenOfInterest (Token check){
        check.isRBracket()   ||      check.isSingleQuote()||
        check.isDoubleQuote()||
        check.isAssignmentOperator()
-       ){
+            ){
         return true;
     }
     return false;
 }
+
+
+

@@ -30,4 +30,3 @@ private:
 
 
 #endif //PROJECT1_PHASE2_TOKENIZER_HPP
-

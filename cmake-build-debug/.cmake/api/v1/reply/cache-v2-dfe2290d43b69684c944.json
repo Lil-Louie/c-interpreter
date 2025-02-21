@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A5-AST/cmake-build-debug"
+			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A6-Interpreter/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A5-AST/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A6-Interpreter/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A5-AST"
+			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A6-Interpreter"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -819,7 +819,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "CS460_A3_RDP_CLion_"
+			"value" : "CS460_A6_Interpreter"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1102,7 +1102,7 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "CS460_A3_RDP_CLion__BINARY_DIR",
+			"name" : "CS460_A6_Interpreter_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1111,10 +1111,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A5-AST/cmake-build-debug"
+			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A6-Interpreter/cmake-build-debug"
 		},
 		{
-			"name" : "CS460_A3_RDP_CLion__IS_TOP_LEVEL",
+			"name" : "CS460_A6_Interpreter_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1126,7 +1126,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "CS460_A3_RDP_CLion__SOURCE_DIR",
+			"name" : "CS460_A6_Interpreter_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,7 +1135,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A5-AST"
+			"value" : "/Users/flacco/CS Projects/CS 460 Project/CS460-A6-Interpreter"
 		}
 	],
 	"kind" : "cache",

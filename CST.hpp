@@ -13,17 +13,25 @@ class CST {
 public:
     //default constructer which  sets our first cstnode to nullptr
     CST(): root( nullptr ) {};
+
+    //general fucntions for CST, AST and interpreter
     //function to set the root node to a new cstnode
     void setRoot(CSTNode* node) { root = node; }
     void addChild(CSTNode* nodeToken,Token token);
     void addSibling(CSTNode* nodeToken, Token token);
     void printTree();   //Breadth First Traversal
-    void cstToAst();   //Breadth First Traversal
-    void RemoveElement();
     CSTNode* getRoot() { return root; }
-    std::vector<Token> yardAlgorithm (std::vector<Token>& infix);
-    std::vector<Token> yardAlgorithm2 (std::vector<Token>& infix);
+    void RemoveElement();
     bool tokenOfInterest(Token check);
+    CSTNode* getNodeAtAddress(int searchAddress);
+
+    //AST conversion function and infix to postfix for easier processing
+    std::vector<Token> yardAlgorithm (std::vector<Token>& infix);
+    void cstToAst();   //Breadth First Traversal
+
+    //Intepreter functions
+    void interpret();
+    CSTNode* getMainNode();
     bool inForLoop = false;
 
 private:

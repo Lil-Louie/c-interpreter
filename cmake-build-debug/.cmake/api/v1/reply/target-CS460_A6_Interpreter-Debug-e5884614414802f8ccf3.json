@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "CS460_A3_RDP"
+			"path" : "CS460_A6_Interpreter"
 		}
 	],
 	"backtrace" : 1,
@@ -54,11 +54,12 @@
 				2,
 				3,
 				4,
-				5
+				5,
+				6
 			]
 		}
 	],
-	"id" : "CS460_A3_RDP::@6890427a1f51a3e7e1df",
+	"id" : "CS460_A6_Interpreter::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -74,8 +75,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "CS460_A3_RDP",
-	"nameOnDisk" : "CS460_A3_RDP",
+	"name" : "CS460_A6_Interpreter",
+	"nameOnDisk" : "CS460_A6_Interpreter",
 	"paths" : 
 	{
 		"build" : ".",
@@ -92,7 +93,8 @@
 				2,
 				3,
 				4,
-				5
+				5,
+				6
 			]
 		}
 	],
@@ -132,6 +134,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "SymbolTable.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "interpreter.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

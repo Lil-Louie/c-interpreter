@@ -30,7 +30,7 @@ SRCS = main.cpp Token.cpp Tokenizer.cpp Parser.cpp CST.cpp SymbolTable.cpp
 OBJS = $(SRCS:.c=.o)
 
 # define the executable file 
-MAIN = AST
+MAIN = INTERP
 
 #
 # The following part of the makefile is generic; it can be used to 
