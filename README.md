@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 🖥️ C Interpreter — Recursive Descent Parser & Shunting Yard Algorithm
 
 Welcome to the C Interpreter Project, a powerful, lightweight interpreter designed for evaluating custom C-like programs. Built from scratch, this interpreter leverages advanced parsing techniques, including recursive descent parsing and the shunting yard algorithm for efficient expression evaluation.
@@ -65,3 +66,7 @@ This project is licensed under the MIT License. See the LICENSE file for more in
 Developed by Luis Galvez, Xander, Christian Gonzalez, and Anthony Manese
 Your feedback and suggestions are always appreciated! 🚀
 
+=======
+# c-interpreter
+A simplified C interpreter written in C++ featuring tokenization, recursive descent parsing, AST/CST construction, and function execution.
+>>>>>>> 4b82021d2643cbcdcd172609ddd3144f088b976b
