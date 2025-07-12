@@ -1,72 +1,96 @@
-<<<<<<< HEAD
-🖥️ C Interpreter — Recursive Descent Parser & Shunting Yard Algorithm
+# C Interpreter
 
-Welcome to the C Interpreter Project, a powerful, lightweight interpreter designed for evaluating custom C-like programs. Built from scratch, this interpreter leverages advanced parsing techniques, including recursive descent parsing and the shunting yard algorithm for efficient expression evaluation.
+A lightweight interpreter for a subset of the C programming language, written in modern C++. This project was developed from scratch to demonstrate a deep understanding of compiler design, tokenization, parsing, abstract syntax tree (AST) and concrete syntax tree (CST) construction, as well as function evaluation and scope management.
 
-🚀 Features
+## 🚀 Overview
 
-🔍 Recursive Descent Parser
-A robust parsing engine that handles complex grammatical structures with ease, supporting expressions, conditionals, loops, and functions.
-🧮 Shunting Yard Algorithm
-Optimizes the evaluation of mathematical expressions, ensuring correct operator precedence and associativity.
-🌳 Concrete Syntax Tree (CST) Representation
-Utilizes an LCRS (Left-Child, Right-Sibling) binary tree structure to manage program syntax in an intuitive, memory-efficient format.
-🏗️ Function Evaluation System
-Supports custom functions, including a demonstration with sum_of_first_n_squares()—executed dynamically after evaluating the main() function.
-🛠️ Modular Code Design
-Easily extensible, making it simple to add new language features, operators, or syntax rules.
-📚 How It Works
+This interpreter simulates how a C-like language is parsed and executed. It processes `.c` files through several stages: lexical analysis, recursive descent parsing, syntax tree generation, and evaluation. It supports function declarations, conditionals, loops, return statements, and arithmetic expressions with operator precedence.
 
-The interpreter follows a multi-stage process:
+## 🔧 Features
 
-Lexical Analysis: Breaks down the source code into tokens.
-Parsing: Uses recursive descent to build a syntax tree from the tokens.
-Evaluation: Runs the program by traversing the CST and applying the shunting yard algorithm for expression resolution.
-🔧 Build Instructions
+- Tokenizer (Lexer) to classify and segment the input stream
+- Recursive descent parser to generate a Concrete Syntax Tree (CST)
+- LCRS (Left-Child, Right-Sibling) representation for CST
+- Abstract Syntax Tree (AST) construction for evaluation
+- Symbol Table to handle scoping, types, and identifiers
+- Supports:
+  - Function declarations and calls
+  - Arithmetic expressions with precedence
+  - Control structures: `if`, `else`, `while`, `for`
+  - Return value handling via a postfix evaluation vector
+- Modular design with clean class separation
 
-Make sure you have CMake and a modern C++ compiler installed.
+## 🧠 Technologies
 
-# Clone the repository
-git clone https://github.com/yourusername/c-interpreter.git
-cd c-interpreter
+- C++17
+- CMake
+- Object-Oriented Programming
+- Compiler Design Principles
 
-# Create a build directory
-mkdir build && cd build
+## 📂 Project Structure
 
-# Generate build files using CMake
-cmake ..
+c-interpreter/
+├── CS460_A6_Interpreter      # Compiled binary (CMake build output)
+├── INTERP                    # Executable from manual g++ build
+├── Makefile                  # Manual build configuration
+├── CMakeLists.txt            # CMake build configuration
+├── correct outputs for test files/
+│   └── ...                   # Output logs for correctness verification
+├── programming_assignment_6-test_file_X.c
+│   └── ...                   # Test input files written in C
+├── Token.cpp/.hpp/.o        # Tokenizer logic and types
+├── Tokenizer.cpp/.hpp/.o    # Lexer that generates tokens from input
+├── Parser.cpp/.hpp/.o       # Builds syntax trees (AST/CST)
+├── CST.cpp/.hpp/.o          # Concrete Syntax Tree logic
+├── CSTNode.hpp              # Nodes for CST
+├── SymbolTable.cpp/.hpp/.o  # Variable/function scope & resolution
+├── interpreter.cpp/.h/.o    # Evaluator logic and interpreter entry
+├── main.cpp/.o              # Entry point (reads & executes .c file)
+├── README.md                # Project documentation (this file)
 
-# Compile the project
+
+## ⚙️ How to Compile & Run
+
+### 🔨 Option 1: Compile Manually Using `g++`
+
+```bash
+g++ main.cpp Token.cpp Tokenizer.cpp Parser.cpp CST.cpp SymbolTable.cpp -o INTERP
+./INTERP programming_assignment_6-test_file_1.c
+
+This builds and runs the interpreter directly from source using g++.
+```bash
+
 make
+./INTERP programming_assignment_6-test_file_1.c
 
-# Run the interpreter
-./CS460_A6_Interpreter
-📝 Usage Example
+mkdir build
+cd build
+cmake ..
+make
+./CS460_A6_Interpreter ../programming_assignment_6-test_file_1.c
+
+Example output
+int main() {
+    return sum_of_first_n_squares(5);
+}
 
 int sum_of_first_n_squares(int n) {
     int sum = 0;
-    for (int i = 1; i <= n; i++) {
-        sum = sum + (i * i);
+    for (int i = 1; i <= n; i = i + 1) {
+        sum = sum + i * i;
     }
     return sum;
 }
 
-int main() {
-    int result = sum_of_first_n_squares(5);
-    print(result); // Output: 55
-}
-🧑‍💻 Contributing
+ Purpose
 
-Contributions are welcome! Feel free to fork the repository, submit pull requests, or suggest new features. If you find a bug, open an issue so we can squash it together.
+This project was created as part of an advanced Computer Science course to demonstrate:
 
-📄 License
+Manual parser construction (recursive descent)
+Syntax tree design and execution
+Intermediate-level C++ development with clean architecture
+Deep understanding of how interpreters and compilers function
 
-This project is licensed under the MIT License. See the LICENSE file for more information.
+Developed as part of CS 460: Interpreter Design at Sonoma State University (Fall 2024).
 
-Developed by Luis Galvez, Xander, Christian Gonzalez, and Anthony Manese
-Your feedback and suggestions are always appreciated! 🚀
 
-=======
-# c-interpreter
-A simplified C interpreter written in C++ featuring tokenization, recursive descent parsing, AST/CST construction, and function execution.
->>>>>>> 4b82021d2643cbcdcd172609ddd3144f088b976b
