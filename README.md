@@ -29,45 +29,25 @@ This interpreter simulates how a C-like language is parsed and executed. It proc
 
 ## 📂 Project Structure
 
-c-interpreter/
-├── CS460_A6_Interpreter # Compiled binary (CMake build output)
-├── INTERP # Executable from manual g++ build
-├── Makefile # Manual build configuration
-├── CMakeLists.txt # CMake build configuration
-├── correct outputs for test files/
-│ └── ... # Output logs for correctness verification
-├── programming_assignment_6-test_file_X.c
-│ └── ... # Test input files written in C
-├── Token.cpp/.hpp/.o # Tokenizer logic and types
-├── Tokenizer.cpp/.hpp/.o # Lexer that generates tokens from input
-├── Parser.cpp/.hpp/.o # Builds syntax trees (AST/CST)
-├── CST.cpp/.hpp/.o # Concrete Syntax Tree logic
-├── CSTNode.hpp # Nodes for CST
-├── SymbolTable.cpp/.hpp/.o # Variable/function scope & resolution
-├── interpreter.cpp/.h/.o # Evaluator logic and interpreter entry
-├── main.cpp/.o # Entry point (reads & executes .c file)
-├── README.md # Project documentation (this file)
+<pre> ```plaintext c-interpreter/ ├── CS460_A6_Interpreter # Compiled binary (CMake build output) ├── INTERP # Executable from manual g++ build ├── Makefile # Manual build configuration ├── CMakeLists.txt # CMake build configuration ├── correct outputs for test files/ │ └── ... # Output logs for correctness verification ├── programming_assignment_6-test_file_X.c │ └── ... # Test input files written in C ├── Token.cpp/.hpp/.o # Tokenizer logic and types ├── Tokenizer.cpp/.hpp/.o # Lexer that generates tokens from input ├── Parser.cpp/.hpp/.o # Builds syntax trees (AST/CST) ├── CST.cpp/.hpp/.o # Concrete Syntax Tree logic ├── CSTNode.hpp # Nodes for CST ├── SymbolTable.cpp/.hpp/.o # Variable/function scope & resolution ├── interpreter.cpp/.h/.o # Evaluator logic and interpreter entry ├── main.cpp/.o # Entry point (reads & executes .c file) ├── README.md # Project documentation (this file) ``` </pre>
 
+⚙️ How to Compile & Run
 
-## ⚙️ How to Compile & Run
-
-
-```bash
+🔨 Option 1: Compile Manually Using g++
 g++ main.cpp Token.cpp Tokenizer.cpp Parser.cpp CST.cpp SymbolTable.cpp -o INTERP
 ./INTERP programming_assignment_6-test_file_1.c
-
 This builds and runs the interpreter directly from source using g++.
-
+📦 Option 2: Using the Makefile
 make
 ./INTERP programming_assignment_6-test_file_1.c
-
+🧱 Option 3: Using CMake (Preferred)
 mkdir build
 cd build
 cmake ..
 make
 ./CS460_A6_Interpreter ../programming_assignment_6-test_file_1.c
+🧪 Example Input
 
-Example output
 int main() {
     return sum_of_first_n_squares(5);
 }
@@ -79,16 +59,14 @@ int sum_of_first_n_squares(int n) {
     }
     return sum;
 }
-
-Purpose
+🎯 Purpose
 
 This project was created as part of an advanced Computer Science course to demonstrate:
 
 Manual parser construction (recursive descent)
-Syntax tree design and execution
+Syntax tree design and evaluation
 Intermediate-level C++ development with clean architecture
-Deep understanding of how interpreters and compilers function
+A deep understanding of how interpreters and compilers function
+🧑‍🎓 Academic Context
 
 Developed as part of CS 460: Interpreter Design at Sonoma State University (Fall 2024).
-
-
